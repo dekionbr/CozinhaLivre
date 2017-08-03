@@ -1,0 +1,75 @@
+﻿@model Paginacao<Autor>
+@{
+    ViewBag.Title = "Autores";
+}
+
+<div class="row">
+
+    @Html.Partial("_MenuVertical")
+
+    <div class="large-10 medium-12 columns">
+        <h2>Lista de Autores</h2>
+        <div class="row">
+            <div class="large-2 large-offset-10 columns">
+                <a href="@Url.Action("IncluirAutor")" class="button">Incluir Novo</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                @if (Model.Count > 0)
+                {
+
+                    <table class="hover" width="100%">
+                        <thead>
+                            <tr>
+                                <th>#ID</th>
+                                <th>Nome</th>
+                                <th>Nº Suspensões</th>
+                                <th width="300">Email</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>#@item.Id</td>
+                                    <td>
+                                        @if (item.isNew)
+                                        {
+                                            <span class="alert badge">Novo</span> @item.Nome
+                                        }
+                                        else
+                                        {
+                                            @item.Nome
+                                        }
+                                    </td>
+                                    <td>@item.NumSuspensoes</td>
+                                    <td>@item.Usuario.EMail</td>
+                                    <td>
+                                        <a class="tiny button" href="@Url.Action("Autor", new { id = @item.Id })">Editar</a>
+                                        <a class="tiny button" href="@Url.Action("DeletarAutor", new { id = @item.Id })">Deletar</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+                    if (Model.TotalPaginas > 1)
+                    {
+                        @Html.Paginacao(Model)
+                    }
+
+                }
+                else
+                {
+                    <p>Nenhum autor no momento</p>
+                }
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

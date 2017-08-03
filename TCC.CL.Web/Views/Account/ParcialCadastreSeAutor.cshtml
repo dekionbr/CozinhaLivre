@@ -1,0 +1,182 @@
+﻿@using TCC.CL.Core.Enumeration
+@using TCC.CL.Core.Helper
+@model TCC.CL.Core.Entities.Autor
+
+@{
+    IList<SelectListItem> lista = new List<SelectListItem>();
+
+    foreach (UF item in Enum.GetValues(typeof(UF)))
+    {
+        SelectListItem select = new SelectListItem();
+        select.Value = ((int)item).ToString();
+        select.Text = item.GetDescription();
+        lista.Add(select);
+    }
+}
+
+@using (Html.BeginForm("IncluirAutor", "Account", FormMethod.Post, new { @id = "Autor", data_abide = "", novalidate = "" }))
+{
+    <div class="row">
+        <h4>
+            Dados Pessoais
+        </h4>
+    </div>
+    <div class="row">
+        <div class="medium-8 columns">
+            <label>
+                Nome (*)
+                @Html.TextBoxFor(x => x.Nome, new { placeholder = "Nome do Autor", required = "" })
+                <span class="form-error">
+                    Campo Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-4 columns">
+            <label>
+                Data de Nascimento (*)
+                @Html.TextBoxFor(x => x.DataNascimento, "{0:MM/dd/yyyy}", new { placeholder = "00/00/0000", required = "", patternType = "DataNascimento" })
+                <span class="form-error">
+                    Campo Obrigatório
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-2 columns">
+            <label>
+                Estado (*)
+                @Html.DropDownListFor(x => x.UF, lista, "Selecione", new { required = "" })
+                <span class="form-error">
+                    Campo Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-5 columns">
+            <label>
+                Cidade (*)
+                @Html.TextBoxFor(x => x.Cidade, new { placeholder = "Cidade", required = "" })
+                <span class="form-error">
+                    Campo Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-5 columns">
+            <label>
+                Bairro (*)
+                @Html.TextBoxFor(x => x.Bairro, new { placeholder = "Bairro", required = "" })
+                <span class="form-error">
+                    Campo Obrigatório
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-8 columns">
+            <label>
+                Endereço (*)
+                @Html.TextBoxFor(x => x.Logradouro, new { placeholder = "Endereço", required = "" })
+                <span class="form-error">
+                    Campo Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-4 columns">
+            <label>
+                Numero (*)
+                @Html.TextBoxFor(x => x.Numero, new { placeholder = "Numero", required = "" })
+                <span class="form-error">
+                    Campo Obrigatório
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-6 columns">
+            <label>
+                Complemento
+                @Html.TextBoxFor(x => x.Complemento, new { placeholder = "Complemento" })
+            </label>
+        </div>
+        <div class="medium-6 columns">
+            <label>
+                CEP (*)
+                @Html.TextBoxFor(x => x.Cep, new { placeholder = "CEP", required = "", patterntype = "CEP" })
+                <span class="form-error">
+                    Campo Obrigatório
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-4 columns">
+            <label>
+                Telefone Comercial
+                @Html.TextBox("Telefone_Comercial", null, new { placeholder = "(99) 99999-9999", patternType = "telefone" })
+                <span class="form-error">
+                    Campo Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-4 columns">
+            <label>
+                Telefone Pessoal
+                @Html.TextBox("Telefone_Pessoal", null, new { placeholder = "(99) 99999-9999", patternType = "telefone" })
+            </label>
+        </div>
+        <div class="medium-4 columns">
+            <label>
+                Telefone Residencial
+                @Html.TextBox("Telefone_Residencial", null, new { placeholder = "(99) 99999-9999", patternType = "telefone" })
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <h4>Dados de acesso</h4>
+    </div>
+    <div class="row">
+        <div class="medium-6 columns">
+            <label>
+                E-mail (*)
+                @Html.TextBoxFor(x => x.Usuario.EMail, new { placeholder = "eu@email.com", required = "", type = "email" })
+                <span class="form-error">
+                    Campo Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-6 columns">
+            <label>
+                Login (*)
+                @Html.TextBoxFor(x => x.Usuario.Login, new { placeholder = "MasterChief", required = "" })
+                <span class="form-error">
+                    Campo Obrigatório
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-6 columns">
+            <label>
+                Senha (*)
+                @Html.PasswordFor(x => x.Usuario.Senha, new { placeholder = "**********", required = "" })
+                <span class="form-error">
+                    Campo Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-6 columns">
+            <label>
+                Repita a senha (*)
+                @Html.Password("RepitaSenha", null, new { placeholder = "**********", required = "", data_equalto = "Usuario_Senha" })
+                <span class="form-error">
+                    Repita a senha corretamente
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-12 columns text-right">
+            <a class="button alert" href="javascript:history.back();">Cancelar</a>
+            <input type="submit" class="button" name="Submit" value="Enviar" />            
+        </div>
+    </div>
+}

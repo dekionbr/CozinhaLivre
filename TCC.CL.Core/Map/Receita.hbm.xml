@@ -1,0 +1,59 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="TCC.CL.Core.Entities.Receita, TCC.CL.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`Receita`">
+    <id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" />
+      <generator class="identity" />
+    </id>
+    <bag name="RevisoesAnteriores">
+      <key>
+        <column name="Parente_id" />
+      </key>
+      <one-to-many class="TCC.CL.Core.Entities.Receita, TCC.CL.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" not-found="ignore" />
+    </bag>
+    <bag name="Avalicoes">
+      <key>
+        <column name="Receita_id" />
+      </key>
+      <one-to-many class="TCC.CL.Core.Entities.Avaliacao, TCC.CL.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" not-found="ignore" />
+    </bag>
+    <bag name="Categorias">
+      <key>
+        <column name="Receita_id" />
+      </key>
+      <one-to-many class="TCC.CL.Core.Entities.Categoria, TCC.CL.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" not-found="ignore" />
+    </bag>
+    <bag name="Comentarios">
+      <key>
+        <column name="Receita_id" />
+      </key>
+      <one-to-many class="TCC.CL.Core.Entities.Comentario, TCC.CL.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" not-found="ignore" />
+    </bag>
+    <property name="Titulo" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Titulo" length="60" />
+    </property>
+    <property name="Conteudo" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Conteudo" length="5000" />
+    </property>
+    <property name="Data" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Data" />
+    </property>
+    <property name="Audiencia" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Audiencia" />
+    </property>
+    <property name="Destaque" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Destaque" />
+    </property>
+    <property name="Status" type="Int32">
+      <column name="Status" />
+    </property>
+    <property name="Imagem" type="System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Imagem" />
+    </property>
+    <many-to-one class="TCC.CL.Core.Entities.Autor, TCC.CL.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Autor">
+      <column name="Autor_id" />
+    </many-to-one>
+    <many-to-one class="TCC.CL.Core.Entities.Receita, TCC.CL.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Parente" not-found="ignore">
+      <column name="Parente_id" />
+    </many-to-one>
+  </class>
+</hibernate-mapping>

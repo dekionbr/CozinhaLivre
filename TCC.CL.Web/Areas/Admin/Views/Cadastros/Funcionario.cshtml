@@ -1,0 +1,196 @@
+﻿@model TCC.CL.Core.Entities.Funcionario
+
+@{
+    ViewBag.Title = "Funcionario";
+
+    ViewBag.Title = "Área de Cadastro";
+
+    object htmlobject = new { placeholder = "Login", requered = "" };
+
+    if (!User.IsInRole(TCC.CL.Core.Seguranca.RoleManager.Administrador))
+    {
+        htmlobject = new { placeholder = "Login", requered = "", disabled = "" };
+    }
+
+}
+
+<div class="row">
+
+    @Html.Partial("_MenuVertical")
+
+    <div class="large-10 medium-12 columns">
+        <h2>Editar Funcionario</h2>
+        <div class="row">
+            @using (Html.BeginForm("IncluirFuncionario", "Cadastros", FormMethod.Post, new { @id = "Funcionario" }))
+            {
+                @Html.HiddenFor(x => x.Id)
+
+                <div class="row">
+                    <h4>
+                        Dados Pessoais
+                    </h4>
+                </div>
+                <div class="row">
+                    <div class="medium-8 columns">
+                        <label>
+                            Nome
+                            @Html.TextBoxFor(x => x.Nome, new { placeholder = "Nome do Autor", required = "" })
+                        </label>
+                    </div>
+                    <div class="medium-4 columns">
+                        <label>
+                            Data de Nascimento
+                            @Html.TextBoxFor(x => x.DataNascimento, "", new { placeholder = "00/00/0000", required = "", patternType = "DataNascimento" })
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    @if (User.IsInRole(TCC.CL.Core.Seguranca.RoleManager.Administrador))
+                    {
+                        <div class="medium-4 columns">
+                            <label>
+                                RG
+                                @Html.TextBoxFor(x => x.RG, new { placeholder = "00.000.000-0", required = "", patternType = "RG" })
+                            </label>
+                        </div>
+
+                        <div class="medium-4 columns">
+                            <label>
+                                CPF
+                                @Html.TextBoxFor(x => x.CPF, new { placeholder = "000.000.000-00", required = "", patternType = "CPF" })
+                            </label>
+                        </div>
+
+                        <div class="medium-4 columns">
+                            <label>
+                                Tipo de Funcionário
+                                @Html.DropDownEnumListFor(x => x.TipoFuncionario, Model.TipoFuncionario, "Selecione")
+                            </label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="medium-6 columns">
+                            <label>
+                                RG
+                                @Html.TextBoxFor(x => x.RG, new { placeholder = "00.000.000-0", required = "", patternType = "RG" })
+                            </label>
+                        </div>
+
+                        <div class="medium-6 columns">
+                            <label>
+                                CPF
+                                @Html.TextBoxFor(x => x.CPF, new { placeholder = "000.000.000-00", required = "", patternType = "CPF" })
+                            </label>
+                        </div>
+                    }
+                </div>
+                <div class="row">
+                    <div class="medium-3 columns">
+                        <label>
+                            Estado
+                            <select data-val="true" data-val-required="O campo UF é obrigatório." id="UF" name="UF" required="">
+                                <option value="">Selecione</option>
+
+                                @foreach (var item in Enum.GetValues(typeof(UF)).Cast<object>())
+                                {
+                                    if (item.Equals(Model.UF))
+                                    {
+                                        <option value="@((int)item)" selected>@item.GetDescription()</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@((int)item)">@item.GetDescription()</option>
+                                    }
+                                }
+                            </select>
+                            @*@Html.DropDownEnumListFor(x => x.UF, Model.UF, new { required = "" })*@
+                        </label>
+                    </div>
+                    <div class="medium-4 columns">
+                        <label>
+                            Cidade
+                            @Html.TextBoxFor(x => x.Cidade, new { placeholder = "Cidade", required = "" })
+                        </label>
+                    </div>
+                    <div class="medium-5 columns">
+                        <label>
+                            Bairro
+                            @Html.TextBoxFor(x => x.Bairro, new { placeholder = "Bairro", required = "" })
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="medium-8 columns">
+                        <label>
+                            Endereço
+                            @Html.TextBoxFor(x => x.Logradouro, new { placeholder = "Endereço", required = "" })
+                        </label>
+                    </div>
+                    <div class="medium-4 columns">
+                        <label>
+                            Numero
+                            @Html.TextBoxFor(x => x.Numero, new { placeholder = "Numero", required = "" })
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="medium-6 columns">
+                        <label>
+                            Complemento
+                            @Html.TextBoxFor(x => x.Complemento, new { placeholder = "Complemento", required = "" })
+                        </label>
+                    </div>
+                    <div class="medium-6 columns">
+                        <label>
+                            CEP
+                            @Html.TextBoxFor(x => x.Cep, new { placeholder = "CEP", required = "", patternType = "CEP" })
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach (var item in Model.Telefones)
+                    {
+                        <div class="columns">
+                            <label>
+                                @item.Key.Replace('_', ' ')
+                                @Html.TextBox(item.Key, item.ObterTelefoneFormatado(), new { placeholder = "(999) 99999-9999", patternType = "telefone" })
+                            </label>
+                        </div>
+                    }
+                </div>
+                <div class="row">
+                    <h4>Dados de acesso</h4>
+                </div>
+                <div class="row">
+                    <div class="medium-4 columns">
+                        <label>
+                            Login
+                            @Html.TextBoxFor(x => x.Usuario.Login, htmlobject)
+                        </label>
+                    </div>
+                    <div class="medium-4 columns">
+                        <label>
+                            Senha
+                            @Html.PasswordFor(x => x.Usuario.Senha, new { placeholder = "********" })
+                        </label>
+                    </div>
+                    <div class="medium-4 columns">
+                        <label>
+                            Repita a senha
+                            @Html.Password("ConfirmaSenha", "", new { placeholder = "********", data_equalto = "Usuario_Senha" })
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="medium-4 columns medium-offset-8 text-right">
+                        <a class="button alert" href="javascript:history.back();">Cancelar</a>
+                        <input type="submit" class="button" value="Salvar">
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,102 @@
+﻿@using TCC.CL.Core.Entities
+@model TCC.CL.Core.Entities.Receita
+@{
+    ViewBag.Title = "Index";
+
+}
+
+@Html.Partial("_Busca")
+
+
+<div class="row expanded busca">
+    <div class="large-2 medium-12 large-push-10 columns hide-for-print">
+        @Html.Action("Patrocinio", "Busca", string.Join("+", Model.Categorias.Select(x => x.Valor).ToArray()))
+    </div>
+
+    <div class="large-10 medium-12 large-pull-2 columns hi">
+        <div class="row">
+            <h1>@Model.Titulo</h1>
+            @if (!Model.SubTitulo.IsEmpty())
+            {
+                <h2>
+                    @Model.SubTitulo
+                </h2>
+            }
+            <div class="medium-12 columns">
+                <div class="media-object stack-for-small">
+                    <div class="thumbnail thumbnail-receita">
+                        <img src="@Model.GetUrlImagem(350, 250)" width="350" height="250">
+                    </div>
+
+                    @Html.RenderHtml(Model.Conteudo)
+                </div>
+            </div>
+        </div>
+        <div class="row hide-for-print">
+            <div class="medium-2 columns text-left">
+                <input class="button fa fa-envelope-o" type="button" onclick="javascript: window.print();" value="Imprimir" />
+            </div>
+        </div>
+        <div class="row hide-for-print">
+            <div class="medium-12 columns">
+                <h3>Comentários</h3>
+                @using (Html.BeginForm("IncluirComentario", "Receitas", new { id = Model.Id }, FormMethod.Post))
+                {
+                    <div class="row">
+                        @if (User == null)
+                        {
+                            <div class="medium-12 columns">
+                                <label>
+                                    Nome
+                                    @Html.TextBox("Nome", "", new { placeholder = "Incluir o seu nome", maxlength = "60" });
+                                </label>
+                            </div>
+                        }
+
+                        <div class="medium-12 columns">
+                            <label>
+                                Titulo
+                                @Html.TextBox("Titulo", "", new { placeholder = "Inclua o titulo", maxlength = "60" })
+                                @*<input type="text" id="Titulo" name="Titulo" maxlength="60" placeholder="Inclua o titulo">*@
+                            </label>
+                        </div>
+                        <div class="medium-12 columns">
+                            <label>
+                                @Html.TextArea("ConteudoComentario", new { placeholder = "Inclua o conteúdo sucinto" })
+                                @*<textarea id="Conteudo" name="Conteudo" placeholder="Inclua o conteúdo sucinto"></textarea>*@
+                                <small>Não nos responsabilizamos por comentários de terceiros em nosso site</small>
+                            </label>
+                        </div>
+                        <div class="medium-1 medium-offset-11 columns align-right">
+                            <input type="submit" class="button" value="Enviar">
+                        </div>
+                    </div>
+                }
+                <div class="media-object">
+                    @if (Model.Comentarios.Where(x => x.Ativo == true).Count() > 0)
+                    {
+                        foreach (var item in Model.Comentarios.Where(x => x.Ativo == true))
+                        {
+
+                            <div class="media-object-section">
+                                <h4>@item.Titulo</h4>
+                                <h5>
+                                    por @if (!string.IsNullOrEmpty(item.NomeAnonimo))
+                                    {
+                                        @item.NomeAnonimo
+                                    }
+                                    else
+                                    {
+                                        <span>Anônimo</span>
+                                    }
+                                </h5>
+                                <p>@item.Conteudo</p>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

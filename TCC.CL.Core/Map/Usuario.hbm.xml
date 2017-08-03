@@ -1,0 +1,29 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="TCC.CL.Core.Entities.Usuario, TCC.CL.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`Usuario`">
+    <id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" />
+      <generator class="identity" />
+    </id>
+    <property name="DataAprovacao" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="DataAprovacao" />
+    </property>
+    <property name="IsNovo" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="IsNovo" />
+    </property>
+    <property name="EMail" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="EMail" />
+    </property>
+    <property name="Login" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Login" />
+    </property>
+    <property name="Senha" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Senha" />
+    </property>
+    <property name="FotoPerfil" type="System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="FotoPerfil" />
+    </property>
+    <property name="Grupo" type="Int32">
+      <column name="Grupo" />
+    </property>
+  </class>
+</hibernate-mapping>

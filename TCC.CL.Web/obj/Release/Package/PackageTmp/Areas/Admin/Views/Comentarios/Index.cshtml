@@ -1,0 +1,64 @@
+﻿@model Paginacao<Comentario>
+@{
+    ViewBag.Title = "Comentários";
+}
+
+<div class="row">
+
+    @Html.Partial("_MenuVertical")
+
+    <div class="large-10 medium-12 columns">
+        <h2>Lista de Comentários</h2>
+        @*<div class="callout large">
+                <h5>Novas comentários aguardando moderação</h5>
+                <p>Existem 5 comentários esperando moderação. <a href="#">Clique aqui</a> para listar somente os comentários que precisam ser moderadas.</p>
+            </div>*@
+
+        @if (Model.Count > 0)
+        {
+            <div class="table-scroll" width="100%">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#ID</th>
+                            <th>Resumo</th>
+                            <th>Titulo Receita</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>
+                                    @if (!item.Ativo)
+                                    {
+                                        <span class="aslert badge">Novo</span>
+                                    }@item.Conteudo
+                                </td>
+                                <td>@item.Receita.Titulo.Remove(0, item.Receita.Titulo.Length > 15 ? 15 : item.Receita.Titulo.Length) ...</td>
+                                <td>
+                                    <a class="tiny button" href="@Url.Action("Liberar", new { id = item.Id })" title="Liberar comentário"><i class="fa fa-check-circle-o"></i></a>
+                                    <a class="tiny button" href="@Url.Action("Editar", new { id = item.Id })" title="Moderar comentário"><i class="fa fa-pencil-square-o"></i></a>
+                                    <a class="tiny button" href="@Url.Action("Delete", new { id = item.Id })" title="Deletar comentário"><i class="fa fa-minus-circle"></i></a>
+                                    <a class="tiny button" href="@Url.RouteUrl(new { area = "", controller = "Receitas", action = "Receita", id = item.Receita.Id})" title="Ver a receita"><i class="fa fa-arrow-circle-o-right"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+                @if (Model.TotalPaginas > 1)
+                {
+                    @Html.Paginacao(Model)
+                }
+            </div>
+        }
+        else
+        {
+            <p>Nenhum cometário no momento</p>
+        }
+    </div>
+
+</div>

@@ -1,0 +1,2 @@
+C:\Users\desenv05\OneDrive\TCC.CL\TCC.CL.Web\obj\Debug\TCC.CL.Web.csprojResolveAssemblyReference.cache
+C:\Users\desenv05\OneDrive\TCC.CL\TCC.CL.Web\obj\Debug\TCC.CL.Web.dll

@@ -1,0 +1,82 @@
+﻿
+<div class="off-canvas-content" data-off-canvas-content>
+
+
+    <nav class="marketing-topbar show-for-medium top-bar ">
+
+        <ul class="menu top-bar-left">
+            <li class="topbar-title"><a href="@Url.RouteUrl(new { controller = "Home", action = "Index" })" class="logo">Cozinha Livre</a></li>
+        </ul>
+
+        <ul class="dropdown menu top-bar-right hide-for-print" data-dropdown-menu data-click-open="false">
+
+            <li>
+                <a href="@Url.RouteUrl(new { controller = "About", action = "Index" })">Quem Somos</a>
+            </li>
+
+            @if (User != null && User.IsInRole(TCC.CL.Core.Seguranca.RoleManager.Autor))
+            {
+                var autor = User.ObterAutor();
+
+                <li>
+                    <a href="@Url.RouteUrl(new { area = "Admin", controller = "Receitas", action = "Index" })">Painel de Controle</a>
+                    <ul class="submenu menu vertical" data-submenu>
+                        <li><a href="@Url.RouteUrl(new { area = "Admin", controller = "Receitas", action = "Index" })">Receitas</a></li>
+
+                        @if (User.IsInRole(TCC.CL.Core.Seguranca.RoleManager.Funcionario))
+                        {
+                            var funcionario = User.ObterFuncionario();
+
+                            <li>
+                                <a>Cadastros</a>
+                                <ul class="submenu menu vertical" data-submenu>
+                                    <li><a href="@Url.RouteUrl(new { area = "Admin", controller = "Cadastros", action = "Autores" })">Autores</a></li>
+                                    <li><a href="@Url.RouteUrl(new { area = "Admin", controller = "Cadastros", action = "Patrocinadores" })">Patrocinadores</a></li>
+                                    @if (funcionario.Usuario.Grupo == Grupo.Administrador)
+                                    {
+                                        <li><a href="@Url.RouteUrl(new { area = "Admin", controller = "Cadastros", action = "Funcionarios" })">Funcionários</a></li>
+                                    }
+                                </ul>
+                            </li>
+
+                            <li><a href="@Url.RouteUrl(new { area = "Admin", controller = "Comentarios", action = "Index" })">Comentarios</a></li>
+                            <li><a href="@Url.RouteUrl(new { area = "Admin", controller = "Relatorios", action = "Index" })">Relatorios</a></li>
+
+                            if (funcionario != null && (funcionario.Usuario.Grupo == Grupo.Funcionario || funcionario.Usuario.Grupo == Grupo.Administrador))
+                            {
+
+                                <li>
+                                    <a href="@Url.RouteUrl(new { area = "Admin", controller = "Cadastros", action = "Funcionario", id = funcionario.Id })">Perfil</a>
+                                </li>
+                            }
+                        }
+
+                        @if (autor != null && autor.Usuario.Grupo == Grupo.Autor)
+                        {
+                            <li>
+                                <a href="@Url.RouteUrl(new { area = "Admin", controller = "Cadastros", action = "Autor", id = autor.Id })">Perfil</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+                <li>
+                    <a href="@Url.RouteUrl(new { controller = "Account", action = "LogOut" })">Sair</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="@Url.RouteUrl(new { controller = "Account", action = "Index" })">Entrar</a>
+                </li>
+            }
+        </ul>
+
+    </nav>
+
+    <div class="title-bar hide-for-medium hide-for-print">
+        <div class="title-bar-left">
+            <button class="menu-icon" type="button" data-open="offCanvasLeft"></button>
+            <span class="title-bar-title">Cozinha Livre</span>
+        </div>
+    </div>
+</div>

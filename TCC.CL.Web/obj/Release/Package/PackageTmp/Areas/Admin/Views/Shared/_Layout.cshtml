@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    @*Set the viewport width to device width for mobile *@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewBag.Title - Cozinha Livre</title>
+    @*<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />*@
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400italic,500italic,400,500" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
+
+    @Styles.Render("~/Content/foundation/css")
+    @Styles.Render("~/Content/font/css")
+
+
+    @RenderSection("head", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/tinymce")
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @RenderSection("relatorios", required: false)
+
+    <script type="text/javascript">
+    var _ROOT = "@Url.Content("~/Admin")"
+    </script>
+
+</head>
+<body>
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+            @Html.Partial("_Menu")
+
+            @RenderBody()
+
+            @Html.Partial("_Footer")
+
+        </div>
+    </div>
+    
+    @Scripts.Render("~/bundles/foundation")
+    @Scripts.Render("~/bundles/inputmask")
+    @*Use the Scripts section to define page specific scripts*@
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/app")
+    @Html.Partial("_scriptmessage")
+</body>
+</html>

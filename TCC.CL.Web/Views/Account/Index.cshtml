@@ -1,0 +1,42 @@
+﻿@model TCC.CL.Core.Entities.Usuario
+
+@{
+    ViewBag.Title = "Acesso ao Sistema";
+    var Display = "display: none;";
+    string mensagem = ViewData["massage"] as string;
+    if (!string.IsNullOrEmpty(mensagem)) { 
+        Display = "display: block;";
+    }
+
+}
+
+<div class="row expanded align-middle login">
+
+    <div class="large-centered small-3 columns">
+        <div class="thumbnail" style="width:100%">
+            <h3>Acesso ao Sistema</h3>
+            @using (Html.BeginForm("LogIn", "account", FormMethod.Post, new { data_abide = "", novalidate = "" }))
+            {
+                <div data-abide-error class="alert callout" style="display: none;">
+                    <p><i class="fi-alert"></i> Campos com erro.</p>
+                </div>
+
+                <div data-abide-error class="alert callout" style="@Display">
+                    <p><i class="fi-alert"></i> @mensagem</p>
+                </div>
+
+                <label>
+                    Login
+                    @Html.TextBoxFor(x => x.Login, new { required = "" })
+                </label>
+                <label>
+                    Senha
+                    @Html.PasswordFor(x => x.Senha, new { required = "" })
+                </label>
+                <input type="submit" class="button left" value="Entrar">
+                @Html.ActionLink("Cadastre-se", "CadastreSe", new { Controller = "Account", Action = "CadastreSe" })
+            }
+        </div>
+    </div>
+
+</div>

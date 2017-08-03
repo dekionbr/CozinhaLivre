@@ -1,0 +1,11 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="TCC.CL.Core.Entities.Categoria, TCC.CL.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`Categoria`">
+    <id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" />
+      <generator class="identity" />
+    </id>
+    <property name="Valor" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Valor" />
+    </property>
+  </class>
+</hibernate-mapping>

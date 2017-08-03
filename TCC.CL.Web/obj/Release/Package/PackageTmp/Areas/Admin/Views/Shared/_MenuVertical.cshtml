@@ -1,0 +1,80 @@
+﻿@{
+    var usuario = User.ObterUsuario();
+}
+<div class="large-2 medium-12 columns">
+    <ul class="vertical menu">
+        <li><a href="@Url.RouteUrl(new { controller ="Home", action="Index", area = "" })"><i class="fa fa-home" aria-hidden="true"></i> <span>Home</span></a></li>
+        <li>
+            <a href="@Url.RouteUrl(new { controller ="Receitas", action="Index" })"><i class="fa fa-cutlery" aria-hidden="true"></i> <span>Receitas</span></a>
+            <ul class="nested vertical menu">
+                <li><a href="@Url.RouteUrl(new { controller ="Receitas", action="Index" })">Listar</a></li>
+                @if (usuario.Grupo == Grupo.Autor || usuario.Grupo == Grupo.AutorPatrocinado)
+                {
+                    <li><a href="@Url.RouteUrl(new { controller = "Receitas", action = "MinhasReceitas" })">Minhas Receitas</a></li>
+                }
+
+                <li><a href="@Url.RouteUrl(new { controller = "Receitas", action = "Incluir" })">Incluir</a></li>
+                @if (User != null && User.IsInRole(TCC.CL.Core.Seguranca.RoleManager.Funcionario))
+                {
+                    <li><a href="@Url.RouteUrl(new { controller ="Receitas", action="Categoria" })">Categoria</a></li>
+                }
+            </ul>
+        </li>
+        @if (User.IsInRole(TCC.CL.Core.Seguranca.RoleManager.AutorPatrocinado))
+        {
+            <li>
+                <a href="@Url.RouteUrl(new { controller ="Comentarios", action="Index" })"><i class="fa fa-comments-o" aria-hidden="true"></i> <span>Comentários</span></a>
+            </li>
+        }
+
+
+        @if (User.IsInRole(TCC.CL.Core.Seguranca.RoleManager.Funcionario))
+        {
+
+            <li>
+                <a href="href=" @Url.RouteUrl(new { controller = "Cadastros", action = "Index" }) ""><i class="fa fa-pencil-square-o"></i> <span>Cadastros</span></a>
+                <ul class="nested vertical menu">
+
+                    <li><a href="@Url.RouteUrl(new { controller ="Cadastros", action="Autores"})">Autores</a></li>
+                    <li><a href="@Url.RouteUrl(new { controller ="Cadastros", action="Patrocinadores"})">Patrocinadores</a></li>
+                    @if (usuario.Grupo == Grupo.Administrador)
+                    {
+                        <li><a href="@Url.RouteUrl(new { controller ="Cadastros", action="Funcionarios"})">Funcionários</a></li>
+                    }
+                </ul>
+            </li>
+        }
+
+        @if (User != null && User.IsInRole(TCC.CL.Core.Seguranca.RoleManager.Administrador))
+        {
+            <li>
+                <a href="#"><i class="fa fa-bar-chart-o"></i> <span>Relatórios</span></a>
+                <ul class="nested vertical menu">
+                    <li><a href="@Url.RouteUrl(new { controller = "Relatorios", action = "Receitas"})">Receitas por autor</a></li>
+                    <li><a href="@Url.RouteUrl(new { controller = "Relatorios", action = "ReceitasPorBuscas" })">Receitas por Buscas</a></li>
+                    <li><a href="@Url.RouteUrl(new { controller = "Relatorios", action = "Acessos" })">Acessos ao site</a></li>
+                </ul>
+            </li>
+        }
+
+        @if ((usuario.Grupo == Grupo.Autor || usuario.Grupo == Grupo.AutorPatrocinado))
+        {
+            var autor = User.ObterAutor();
+
+            <li>
+                <a href="@Url.RouteUrl(new { controller = "Cadastros", action = "Autor", id = autor.Id})"><i class="fa fa-pencil-square"></i> <span>Perfil</span></a>
+            </li>
+        }
+
+
+        @if (usuario.Grupo == Grupo.Funcionario || usuario.Grupo == Grupo.Administrador)
+        {
+            var funcionario = User.ObterFuncionario();
+
+            <li>
+                <a href="@Url.RouteUrl(new { controller = "Cadastros", action = "Funcionario", id = funcionario.Id })"><i class="fa fa-pencil-square"></i> <span>Perfil</span></a>
+            </li>
+        }
+
+    </ul>
+</div>

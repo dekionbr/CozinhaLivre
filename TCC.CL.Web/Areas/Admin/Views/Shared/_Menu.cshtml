@@ -1,0 +1,22 @@
+﻿<div class="off-canvas-content" data-off-canvas-content>
+    
+    <nav class="marketing-topbar show-for-medium top-bar">
+
+        <ul class="menu top-bar-left">
+            <li class="topbar-title"><a href="@Url.RouteUrl(new { controller = "Home", action = "Index", area = "" })" class="logo">Cozinha Livre</a></li>
+        </ul>
+        <ul class="dropdown menu top-bar-right" data-dropdown-menu data-click-open="false">
+            <li>
+                <a href="@Url.RouteUrl(new { controller = "Account", action = "Logout", area = "" })">Sair</a>
+            </li>
+        </ul>
+
+    </nav>
+
+    <div class="title-bar hide-for-medium">
+        <div class="title-bar-left">
+            <button class="menu-icon" type="button" data-open="offCanvasLeft"></button>
+            <span class="title-bar-title">Cozinha Livre</span>
+        </div>
+    </div>
+</div>

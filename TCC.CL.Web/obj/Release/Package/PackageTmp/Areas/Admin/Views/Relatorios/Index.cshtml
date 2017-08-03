@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Relatórios";
+}
+
+<div class="row">
+
+    @Html.Partial("_MenuVertical")
+
+    <div class="large-10 medium-12 columns">
+        <h2>Relatórios</h2>
+        <div class="row">
+
+            <div class="medium-6 columns">
+                <h4>Lista de dados em Excel</h4>
+                <a href="@Url.Action("AutoresExcel")" class="">Baixar Lista de Autores</a><br />
+                <a href="@Url.Action("FuncionariosExcel")">Baixar Lista de Funcionários</a><br />
+                <a href="@Url.Action("PatrocinadoresExcel")">Baixar Lista de Patrocinadores</a>
+            </div>
+
+            <div class="medium-6 columns">
+                <h4>Categorias</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Categorias</th>
+                            <th>Nº de Receitas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var categoria in ViewBag.Categorias)
+                        {
+                            string valor = "Sem Categoria";
+
+                            if (!string.IsNullOrEmpty(categoria.Label))
+                            {
+                                valor = categoria.Label;
+                            }
+
+                            <tr>
+                                <td>
+                                    @valor
+                                </td>
+                                <td>
+                                    @categoria.Quantidade
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

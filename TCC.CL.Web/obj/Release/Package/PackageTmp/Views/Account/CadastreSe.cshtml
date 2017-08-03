@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Área de Cadastro";
+    
+}
+<div class="row expanded busca">
+    <div class="large-2 medium-12 large-push-10 columns">
+        @Html.Action("Patrocinio", new { controller = "Busca" })
+    </div>
+    <div class="large-10 medium-12 large-pull-2 columns">
+        <h3>Área de Cadastro</h3>
+        <div class="row">
+            <ul class="tabs" data-tabs id="example-tabs">
+                <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Autor</a></li>
+                <li class="tabs-title"><a href="#panel2">Patrocinador</a></li>
+            </ul>
+            <div class="tabs-content" data-tabs-content="example-tabs">
+                <div class="tabs-panel is-active" id="panel1">
+                    @Html.Action("CadastroAutor")
+                </div>
+                <div class="tabs-panel" id="panel2">
+                    @Html.Action("CadastroPatrocinador")
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
