@@ -1,0 +1,4 @@
+﻿@using (Html.BeginForm("Index", "Busca", FormMethod.Get, new { @id = "BuscaHome" }))
+{  
+        @Html.TextBox("q", "", new { @class = "docs-search fi-magnifying-glass", data_docs_search = "", placeholder =  "Faça sua busca de Receitas"})        
+}

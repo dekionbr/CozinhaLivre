@@ -1,0 +1,162 @@
+﻿@model TCC.CL.Web.Areas.Admin.Models.AcessoModel
+
+@{
+    ViewBag.Title = "Relatório de Acessos ao site";
+}
+
+@section relatorios{
+
+    <link href="@Url.Content("~/Content/css/select2.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/Chart.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/select2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ui.datepicker-pt-BR.js")" type="text/javascript"></script>
+
+}
+
+<div class="row">
+    @Html.Partial("_MenuVertical")
+
+    <div class="large-10 medium-12 columns">
+        <h2>Relatório</h2>
+        <div class="row">
+            <div class="large-2 medium-2 columns">
+                <label>Data Inicial</label>
+                @Html.TextBoxFor(x => x.DataInicial, DateTime.Now.AddYears(-1).ToString("dd/MM/yyyy"), new { @class = "dateImputs" })
+            </div>
+            <div class="large-2 medium-2 columns">
+                <label>Data Final</label>
+                @Html.TextBoxFor(x => x.DataFinal, DateTime.Now.ToString("dd/MM/yyyy"), new { @class = "dateImputs" })
+            </div>
+            <div class="large-2 medium-2 columns">
+                <label>Numero de itens</label>
+                @Html.DropDownListFor(x => x.TopItens, new SelectList(new int[] { 5, 10, 15, 20 }, 1))
+            </div>
+            <div class="large-6 medium-6 columns">
+
+            </div>
+        </div>
+        <div class="demo-section k-content wide">
+            <div id="chart"></div>
+        </div>
+        <div class="row">
+            <div class="large-2 medium-2 columns">
+                <label>
+                    Incluir Anonimos?
+                </label>
+                <div class="switch">
+                    @Html.CheckBoxFor(x => x.InAnonimos, new { @class = "switch-input" })
+                    <label class="switch-paddle" for="InAnonimos">
+                        <span class="show-for-sr">Incluir Anonimos</span>
+                    </label>
+                </div>
+            </div>
+            <div class="large-3 medium-3 columns">
+                <label>Navegadores</label>
+                @Html.DropDownEnumListFor(x => x.Navegadores, Model.Navegadores, new { multiple = "multiple" })
+            </div>
+            <div class="large-3 medium-3 columns">
+                <label>Usuarios</label>
+                @Html.DropDownListFor(x => x.Usuarios, new SelectList(Model.Usuarios, "Id", "Login"), new { multiple = "multiple" })
+            </div>
+            <div class="large-2 medium-2 columns">
+                <label>Corte do relatório</label>
+                @Html.DropDownEnumListFor(x => x.Corte, Model.Corte)
+            </div>
+            <div class="large-2 medium-2 columns">
+                <label>&ensp;</label>
+                <a href="#" id="btnGerar" class="button primary"><i class="fa fa-send"></i> Gerar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function createChart() {
+            var inAnonimos = $("#InAnonimos").prop("checked");
+            var navegadores = $("#Navegadores").val();
+            var usuariosId = $("#Usuarios").val();
+            var dataInicial = $("#DataInicial").val();
+            var dataFinal = $("#DataFinal").val();
+            var corte = $("#Corte").val();
+            var topItens = $("#TopItens").val();
+
+            $.ajaxPost({
+
+                // Objeto Enviado para no post
+                data: {
+                    "inAnonimos": inAnonimos,
+                    "navegadores": navegadores,
+                    "usuariosId": usuariosId,
+                    "corte": corte,
+                    "dataInicial": dataInicial,
+                    "dataFinal": dataFinal,
+                    "topItens": topItens
+                },
+
+                // Url do post
+                url: '@Url.Action("ObterDadosAcessos", "Relatorios")',
+
+                // Evento Sucesso
+                success: function (data, textStatus, XMLHttpRequest) {
+                    $("#chart").empty().append("<canvas id=\"GraficoBarra\"style=\"width:100%;\"></canvas>");
+                    var ctx = document.getElementById("GraficoBarra").getContext("2d");
+
+                    var options = {
+                        responsive: true,
+                        tooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%> : <%}%><%= value %>",
+                        multiTooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%> : <%}%><%= value %>",
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    stepSize: 50
+                                }
+                            }]
+                        }
+                    };
+
+                    BarChart = Chart.Bar(ctx, {
+                        data: data,
+                        options: options
+                    });
+
+                    console.log(data);
+                },
+
+                // Evento Erro
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Error: ' + textStatus + " msg: " + errorThrown);
+                }
+            });
+
+
+        }
+
+        function btnGerarEvent(e) {
+            e.preventDefault();
+
+            createChart();
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+        $("#btnGerar").bind("click", btnGerarEvent);
+
+        $(function () {
+            $(".dateImputs").datepicker();
+        });
+
+        var autorUrl = '@Url.Action("ObterAutores", "Relatorios")';
+
+        var $autores = $('#Usuarios').select2({
+            placeholder: 'Selecione os usuarios'
+        });
+
+        var $patrocinadores = $('#Navegadores').select2({
+            placeholder: 'Selecione os navegador'
+        });
+        
+    </script>
+
+}

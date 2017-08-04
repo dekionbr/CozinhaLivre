@@ -1,0 +1,142 @@
+﻿@using TCC.CL.Core.Enumeration
+@using TCC.CL.Core.Helper
+@model TCC.CL.Core.Entities.PessoaJuridica
+
+@{
+    ViewBag.Title = "Patrocinador";
+
+    ViewBag.Title = "Área de Cadastro";
+
+    //IList<SelectListItem> lista = new List<SelectListItem>();
+
+    //foreach (UF item in Enum.GetValues(typeof(UF)))
+    //{
+    //    SelectListItem select = new SelectListItem();
+    //    select.Value = ((int)item).ToString();
+    //    select.Text = item.GetDescription();
+    //    lista.Add(select);
+    //}
+}
+
+<div class="row">
+
+    @Html.Partial("_MenuVertical")
+
+    <div class="large-10 medium-12 columns">
+        <h2>Patrocinador</h2>
+        <div class="row">
+            @using (Html.BeginForm("IncluirPatrocinador", "Cadastros", FormMethod.Post, new { @id = "Patrocinador" }))
+            {
+                @Html.HiddenFor(x => x.Id)
+                
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <label>
+                            Razão Social
+                            @Html.TextBoxFor(x => x.RazaoSocial, new { placeholder = "Razão Social" })
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="medium-8 columns">
+                        <label>
+                            Nome Fantasia
+                            @Html.TextBoxFor(x => x.NomeFantasia, new { placeholder = "Nome Fantasia" })
+                        </label>
+                    </div>
+                    <div class="medium-4 columns">
+                        <label>
+                            CNPJ
+                            @Html.TextBoxFor(x => x.CNPJ, new { placeholder = "00.000.000/0000-00", required = "", patternType = "CNPJ" })
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="medium-2 columns">
+                        <label>
+                            Estado
+                            <select data-val="true" data-val-required="O campo UF é obrigatório." id="UF" name="UF" required="">
+                                <option value="">Selecione</option>
+
+                                @foreach (var item in Enum.GetValues(typeof(UF)).Cast<object>())
+                                {
+                                    if (item.Equals(Model.UF))
+                                    {
+                                        <option value="@((int)item)" selected>@item.GetDescription()</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@((int)item)">@item.GetDescription()</option>
+                                    }
+                                }
+                            </select>                            
+                            @*@Html.DropDownListFor(x => x.UF, lista, "Selecione")*@
+                        </label>
+                    </div>
+                    <div class="medium-5 columns">
+                        <label>
+                            Cidade
+                            @Html.TextBoxFor(x => x.Cidade, new { placeholder = "Cidade" })
+                        </label>
+                    </div>
+                    <div class="medium-5 columns">
+                        <label>
+                            Bairro
+                            @Html.TextBoxFor(x => x.Bairro, new { placeholder = "Bairro" })
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="medium-10 columns">
+                        <label>
+                            Endereço
+                            @Html.TextBoxFor(x => x.Logradouro, new { placeholder = "Endereço" })
+                        </label>
+                    </div>
+                    <div class="medium-2 columns">
+                        <label>
+                            Numero
+                            @Html.TextBoxFor(x => x.Numero, new { placeholder = "Numero" })
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="medium-6 columns">
+                        <label>
+                            Complemento
+                            @Html.TextBoxFor(x => x.Complemento, new { placeholder = "Complemento" })
+                        </label>
+                    </div>
+                    <div class="medium-6 columns">
+                        <label>
+                            CEP
+                            @Html.TextBoxFor(x => x.Cep, new { placeholder = "CEP", required = "", patternType = "CEP" })
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach (var item in Model.Telefones)
+                    {
+                        <div class="columns">
+                            <label>
+                                @item.Key.Replace('_', ' ')
+                                @Html.TextBox(item.Key, item.ObterTelefoneFormatado(), new { placeholder = "(999) 99999-9999", patternType = "telefone" })
+                            </label>
+                        </div>
+                    }                    
+                    
+                </div>                
+                <div class="row">
+                    <div class="medium-4 columns medium-offset-8 text-right">
+                        <a class="button alert" href="javascript:history.back();">Cancelar</a>
+                        <input type="submit" class="button" value="Salvar">
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+

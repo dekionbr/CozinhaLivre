@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TCC.CL.Core.Entities.Autor" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Entities\Autor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Avaliacao" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAABAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Avaliacao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.BaseDomain&lt;T&gt;" Collapsed="true">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\BaseDomain.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Categoria" Collapsed="true">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Categoria.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Comentario" Collapsed="true">
+    <Position X="11.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAABAAAQAAAgAEAAA=</HashCode>
+      <FileName>Entities\Comentarios.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Funcionario" Collapsed="true">
+    <Position X="5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIgAAAAAAAAAAAAAACAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Entities\Funcionario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Pessoa" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAgAAAACIEAAEQgACAAAAAAAAAACAAAAEBEAA=</HashCode>
+      <FileName>Entities\Pessoa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.PessoaFisica" Collapsed="true">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\PessoaFisica.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.PessoaJuridica" Collapsed="true">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAIAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Entities\PessoaJuridica.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Receita" Collapsed="true">
+    <Position X="14" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgQAAAEAAAAAAAAAAAABEgAAAAAEBAAAAAAAgBEABA=</HashCode>
+      <FileName>Entities\Receita.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Telefone" Collapsed="true">
+    <Position X="16.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAgAAAAAAA=</HashCode>
+      <FileName>Entities\Telefone.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Usuario" Collapsed="true">
+    <Position X="20" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAIAAAAAACAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Entities\Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Helper.EnumHelper" Collapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helper\EnumHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Repositorio.Repository&lt;TKey, T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAYAAMAAAACgAggAAAAAAAAAAAkAAAAgAIAAAgAEAAA=</HashCode>
+      <FileName>Repositorio\Repository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TCC.CL.Core.Repositorio.UnitOfWork" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAQQCAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositorio\UnitOfWork.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TCC.CL.Core.SessionFactory" Collapsed="true">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SessionFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="TCC.CL.Core.Infraestrutura.IEntityKey&lt;TKey&gt;" Collapsed="true">
+    <Position X="16.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IEntityKey.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TCC.CL.Core.Infraestrutura.IPersistRepository&lt;TEntity&gt;" Collapsed="true">
+    <Position X="18.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IPersistRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TCC.CL.Core.Infraestrutura.IReadOnlyRepository&lt;TKey, TEntity&gt;" Collapsed="true">
+    <Position X="20" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAgAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IReadOnlyRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TCC.CL.Core.Infraestrutura.IUnitOfWork" Collapsed="true">
+    <Position X="16.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IUnitOfWork.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="TCC.CL.Core.Enumeration.Nivel" Collapsed="true">
+    <Position X="16.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAQAAAAAAAAAAQAAAEACIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enumeration\Nivel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TCC.CL.Core.Enumeration.Status" Collapsed="true">
+    <Position X="18.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAIAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enumeration\Status.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TCC.CL.Core.Enumeration.TipoFuncionarioEnum" Collapsed="true">
+    <Position X="20" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Enumeration\TipoFuncionarioEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TCC.CL.Core.Enumeration.UF" Collapsed="true">
+    <Position X="16.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KACEADCAEABIEmBAABABAAAgQIEAQABAAAAAAADBQAA=</HashCode>
+      <FileName>Enumeration\UF.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

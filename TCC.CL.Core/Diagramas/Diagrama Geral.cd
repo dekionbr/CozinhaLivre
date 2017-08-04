@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="TCC.CL.Core.Entities.PessoaJuridica">
+    <Position X="5.25" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAEAAIAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Entities\PessoaJuridica.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Autores" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Autor">
+    <Position X="7.5" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAEAABAAAA=</HashCode>
+      <FileName>Entities\Autor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Usuario" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Funcionario">
+    <Position X="10.5" Y="7.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIgAAAAAAAAAAAAAACAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Entities\Funcionario.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Usuario" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Pessoa">
+    <Position X="8.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAgAAAACIEAAEQgACAAAAAAAAAACAAAAEBEAA=</HashCode>
+      <FileName>Entities\Pessoa.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Telefones" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.PessoaFisica">
+    <Position X="9.25" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\PessoaFisica.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Telefone">
+    <Position X="5.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAQAAAAAAAAAACAAAAAAAAAgAAAAQAA=</HashCode>
+      <FileName>Entities\Telefone.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Receita">
+    <Position X="3.5" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BCgUAAAEAAABAAAAAAAABEgAAACAEBAAgQAAAgwGABg=</HashCode>
+      <FileName>Entities\Receita.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Autor" />
+      <Property Name="Parente" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Categorias" />
+      <Property Name="Avalicoes" />
+      <Property Name="Comentarios" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Categoria">
+    <Position X="6.25" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Categoria.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Comentario">
+    <Position X="0.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAgAAAAAAAAAAAAAAAAAAAAAAAAAABAAAQAAAgAEABA=</HashCode>
+      <FileName>Entities\Comentario.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Parente" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Avaliacao">
+    <Position X="7" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAACAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Entities\Avaliacao.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Avaliador" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Usuario">
+    <Position X="9.5" Y="11" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAJAAAAAACAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Entities\Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Acesso">
+    <Position X="12.5" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAIABAABAAAAAEAgAAAAA=</HashCode>
+      <FileName>Entities\Acesso.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Busca">
+    <Position X="0.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAABAAAQAAAAAAAAA=</HashCode>
+      <FileName>Entities\Busca.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Receita" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TCC.CL.Core.Entities.Imagem">
+    <Position X="0.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAAAAAA=</HashCode>
+      <FileName>Entities\Imagem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Receita" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,164 @@
+﻿@model TCC.CL.Web.Areas.Admin.Models.AutorModel
+@{
+    ViewBag.Title = "Relatório de Receitas";
+}
+
+@section relatorios{
+
+    <link href="@Url.Content("~/Content/css/select2.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/Chart.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/select2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ui.datepicker-pt-BR.js")" type="text/javascript"></script>
+
+}
+
+<div class="row">
+    @Html.Partial("_MenuVertical")
+
+    <div class="large-10 medium-12 columns">
+        <h2>Relatório</h2>
+        <div class="row">
+            <div class="large-2 medium-2 columns">
+                <label>Data Inicial</label>
+                @Html.TextBoxFor(x => x.DataInicial, DateTime.Now.AddYears(-1).ToString("dd/MM/yyyy"), new { @class = "dateImputs" })
+            </div>
+            <div class="large-2 medium-2 columns">
+                <label>Data Final</label>
+                @Html.TextBoxFor(x => x.DataFinal, DateTime.Now.ToString("dd/MM/yyyy"), new { @class = "dateImputs" })
+            </div>
+            <div class="large-2 medium-2 columns">
+                <label>Numero de itens</label>
+                @Html.DropDownListFor(x => x.TopItens, new SelectList(new int[] { 5, 10, 15, 20 }, 1))
+            </div>
+            <div class="large-6 medium-6 columns">
+
+            </div>
+        </div>
+        <div class="demo-section k-content wide">
+            <div id="chart"></div>
+        </div>
+        <div class="row">
+            <div class="large-3 medium-3 columns">
+                <label>Patrocinadores</label>
+                @Html.DropDownListFor(x => x.Patrocinadores, new SelectList(Model.Patrocinadores, "Id", "RazaoSocial"), new { multiple = "multiple" })
+            </div>
+            <div class="large-3 medium-3 columns">
+                <label>Autores</label>
+                @Html.DropDownListFor(x => x.Autores, new SelectList(Model.Autores, "Id", "Nome"), new { multiple = "multiple", style = "height: 50px;" })
+            </div>
+            <div class="large-3 medium-3 columns">
+                <label>Corte do relatório</label>
+                @Html.DropDownEnumListFor(x => x.Corte, Model.Corte)
+            </div>
+            <div class="large-3 medium-3 columns">
+                <label>&ensp;</label>
+                <a href="#" id="btnGerar" class="button primary"><i class="fa fa-send"></i> Gerar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function createChart() {
+            var autores = $("#Autores").val();
+            var corte = $("#Corte").val();
+            var dataInicial = $("#DataInicial").val();
+            var dataFinal = $("#DataFinal").val();
+            var topItens = $("#TopItens").val();
+
+            $.ajaxPost({
+
+                // Objeto Enviado para no post
+                data: {
+                    "autoresId": autores,
+                    "corte": corte,
+                    "dataInicial": dataInicial,
+                    "dataFinal": dataFinal,
+                    "topItens": topItens
+                },
+
+                // Url do post
+                url: '@Url.Action("ObterDadosReceitas", "Relatorios")',
+
+                // Evento Sucesso
+                success: function (data, textStatus, XMLHttpRequest) {
+                    $("#chart").empty().append("<canvas id=\"GraficoBarra\"style=\"width:100%;\"></canvas>");
+                    var ctx = document.getElementById("GraficoBarra").getContext("2d");
+
+                    var options = {
+                        responsive: true,
+                        tooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%> : <%}%><%= value %>",
+                        multiTooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%> : <%}%><%= value %>",
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    stepSize: 50
+                                }
+                            }]
+                        }
+                    };
+
+                    BarChart = Chart.Bar(ctx, {
+                        data: data,
+                        options: options
+                    });
+
+
+                    console.log(data);
+                },
+
+                // Evento Erro
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Error: ' + textStatus + " msg: " + errorThrown);
+                }
+            });
+
+
+        }
+
+        function btnGerarEvent(e) {
+            e.preventDefault();
+
+            createChart();
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+        $("#btnGerar").bind("click", btnGerarEvent);
+
+        $(function () {
+            $(".dateImputs").datepicker();
+        });
+
+        var autorUrl = '@Url.Action("ObterAutores", "Relatorios")';
+
+        var $autores = $('#Autores').select2({
+            placeholder: 'Selecione o Autor'
+        });
+
+        var $patrocinadores = $('#Patrocinadores').select2({
+            placeholder: 'Selecione o patrocinador'
+        });
+
+        $patrocinadores.on("select2:select", function (evt) {
+            $.ajaxPost({
+                // Objeto Enviado para no post
+                data: {
+                    "patrocinadores": $patrocinadores.val()
+                },
+                // Url do post
+                url: '@Url.Action("ObterAutores", "Relatorios")',
+                // Evento Sucesso
+                success: function (retorno, textStatus, XMLHttpRequest) {
+                    $autores.val(retorno).trigger("change");
+                },
+                // Evento Erro
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Error: ' + textStatus + " msg: " + errorThrown);
+                }
+            })
+        })
+    </script>
+}

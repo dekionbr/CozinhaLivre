@@ -1,0 +1,39 @@
+﻿<div id="message" class="message">
+
+</div>
+
+<div id="erromessage" class="message error">
+
+</div>
+
+<div id="wornmessage" class="message worn">
+
+</div>
+
+<script type="text/javascript">
+    var message = $('#message'),
+        erromessage = $('#erromessage'),
+        wornmessage = $('#wornmessage');
+
+    function message(m, elem) {
+        elem.innerHTML = m;
+        Foundation.Motion.animateIn(elem, ".slide-in-up");
+    }
+
+    var msg = "@TempData["massage"]",
+        erro = "@TempData["erromessage"]",
+        worn = "@TempData["wornmessage"]";
+
+    if (msg != "") {
+        message(msg, message);
+    }
+
+    if (erro != "") {
+        message(erro, erromessage);
+    }
+
+    if (worn != "") {
+        message(worn, wornmessage);
+    }
+</script>
+

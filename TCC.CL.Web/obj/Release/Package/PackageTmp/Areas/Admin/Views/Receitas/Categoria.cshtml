@@ -1,0 +1,70 @@
+﻿@model Paginacao<Categoria>
+@{
+    
+    ViewBag.Title = "Categorias";
+}
+
+<div class="row">
+
+    @Html.Partial("_MenuVertical")
+
+    <div class="large-10 medium-12 columns">
+        <h2>@ViewBag.Title</h2>
+        @using (Html.BeginForm("IncluirCategoria", "Receitas", FormMethod.Post))
+        {
+            <div class="row">
+
+                <div class="medium-8 columns">
+                    <div class="row">
+                        <div class="medium-10 columns">
+                            <label>
+                                Nome da Categoria
+                                @Html.TextBox("Valor", "", new { placeholder = "Nome da Categoria", required = "" })
+                            </label>
+                        </div>
+                        <div class="medium-2 columns">
+                            <label>
+                                <input type="submit" class="button left" value="Salvar" style="margin-top:23px">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        }
+
+        <div class="row">
+            <div class="large-12">
+                @if (Model.Count > 0)
+                {
+                    <table class="hover" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Categorias</th>
+                                @*<th></th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Valor</td>
+                                    @*<td>
+                                          <a class="tiny button" href="@Url.Action("Deletar", new { id = @item.Id })" title="Remover receita"><i class="fi fi-page-remove"></i></a>
+                                      </td>*@
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    
+                    if (Model.TotalPaginas > 1)
+                    {
+                        @Html.Paginacao(Model)
+                    }
+                }
+            </div>
+        </div>
+
+        
+    </div>
+
+</div>

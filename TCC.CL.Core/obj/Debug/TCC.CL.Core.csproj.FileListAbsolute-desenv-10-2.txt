@@ -1,0 +1,3 @@
+C:\Users\desenv05\OneDrive\TCC.CL\TCC.CL.Core\obj\Debug\TCC.CL.Core.csprojResolveAssemblyReference.cache
+C:\Users\desenv05\OneDrive\TCC.CL\TCC.CL.Core\obj\Debug\TCC.CL.Core.dll
+C:\Users\desenv05\OneDrive\TCC.CL\TCC.CL.Core\obj\Debug\TCC.CL.Core.pdb

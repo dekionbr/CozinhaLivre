@@ -1,0 +1,62 @@
+﻿@model Comentario
+@{
+    ViewBag.Title = "Editar Comentário";
+}
+
+<div class="row">
+
+    @Html.Partial("_MenuVertical")
+
+    <div class="large-10 medium-12 columns">
+        <h2>Editar Comentário</h2>
+        <div class="row">
+            @using (Html.BeginForm(new { action = "Edit" }))
+            {
+                @Html.HiddenFor(x => x.Id)
+
+                <div class="medium-12 columns">
+                    <div class="row">
+                        <div class="medium-8 columns">
+                            <label>
+                                Titulo
+                                @Html.TextBoxFor(x => x.Titulo, new { placeholder = "Titulo" })
+                            </label>
+                        </div>
+                        <div class="medium-4 columns">
+                            <div class="callout">
+                                Usuário:  @if (Model.Autor != null)
+                                {
+                                    <span>@Model.Autor.Login, </span>
+                                }
+                                else
+                                {
+                                    <span>@Model.NomeAnonimo, </span>
+                                }
+                                <span>Data: @Model.Data.ToShortDateString()</span>
+                                <br />
+                                <label>
+                                    @Html.CheckBoxFor(x => x.Ativo) Liberar Comentário
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="medium-12 columns">
+                            <label>
+                                Conteúdo
+                                @Html.TextAreaFor(x => x.Conteudo, new { placeholder = "Conteudo", rows = "5" })
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="medium-2 medium-offset-10 text-right columns">
+                            <input type="submit" class="button right" value="Salvar" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,139 @@
+﻿@model Receita
+@{
+
+}
+
+@section relatorios{
+
+    @*@Styles.Render("~/Content/telerik/css")*@
+    <link href="@Url.Content("~/Content/css/select2.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/select2.js")" type="text/javascript"></script>
+
+}
+
+<div class="row">
+
+    @Html.Partial("_MenuVertical")
+
+    <div class="large-10 medium-12 columns">
+        <h2>@ViewBag.Title</h2>
+        @using (Html.BeginForm("CreateOrEdit", "Receitas", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+
+                @Html.HiddenFor(x => x.Id)
+
+                <div class="medium-8 columns">
+                    <div class="row">
+                        <div class="medium-12 columns">
+                            <label>
+                                Titulo
+                                @Html.TextBoxFor(x => x.Titulo, new { placeholder = "Titulo da Receita", required = "" })
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="medium-12 columns">
+                            <label>
+                                Subtitulo
+                                @Html.TextBoxFor(x => x.SubTitulo, new { placeholder = "Subtitulo da Receita", required = "" })
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="medium-12 columns">
+                            <label>
+                                Conteúdo
+                                @Html.TextAreaFor(x => x.Conteudo, new { placeholder = "Conteudo", rows = "10", @class = "tynymce" })
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="medium-4 columns">
+                    <div class="medium-12 columns">
+                        <div class="callout">
+                            <label>
+                                Data de publicação
+                                @Html.TextBoxFor(x => x.Data, DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"), new { placeholder = "00/00/00 00:00:00", patt = "Data", required = "" })
+                            </label>
+                        </div>
+                    </div>
+                    <div class="medium-12 columns">
+                        <div class="callout">
+                            @if (User.IsInRole(TCC.CL.Core.Seguranca.RoleManager.Funcionario))
+                            {
+                                <label for="Destaque"> @Html.CheckBoxFor(x => x.Destaque)  Marcar receita como destaque</label>
+                            }
+                            <label>
+                                Categorias
+                                <select id="Categorias" name="Categorias" multiple>
+                                    @foreach (var item in ViewBag.Categorias)
+                                    {
+                                        if (Model.CategoriasIds.Contains((item as Categoria).Id))
+                                        {
+                                            <option value="@item.Id" selected>@item.Valor</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Valor</option>
+                                        }
+                                    }
+
+                                </select>                                
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="medium-8 columns">
+                    <div class="row">
+                        <div class="medium-12">
+                            <h5>Imagens da receita</h5>
+                            <input id="files" name="files" type="file" multiple />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            if (Model.Imagens.Count() > 0)
+            {
+                <div class="row">
+                    <div class="medium-8 columns">
+                        @foreach (var image in Model.Imagens)
+                        {
+                            <div class="callout" style="display:inline-block">
+                                <button class="close-button" aria-label="Dismiss alert" type="button" data-idimagem="@image.Id" data-close>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <img class="thumbnail" src="@image.Url?h=100&w=100&mode=crop" height="100" width="100" alt="Photo of Uranus.">
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            <div class="row">
+                <div class="medium-8 columns">
+                    <div class="row">
+                        <div class="medium-4 columns medium-offset-8 text-right">
+                            <a class="button alert" href="javascript:history.back();">Cancelar</a>
+                            <input type="submit" class="button left" value="Salvar">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+        var $autores = $('#Categorias').select2({
+            placeholder: 'Selecione as Categorias',
+            tags: false
+        });
+    </script>
+}

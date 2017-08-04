@@ -1,0 +1,26 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="TCC.CL.Core.Entities.Comentario, TCC.CL.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`Comentario`">
+    <id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" />
+      <generator class="identity" />
+    </id>
+    <property name="Titulo" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Titulo" />
+    </property>
+    <property name="Data" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Data" />
+    </property>
+    <property name="Conteudo" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Conteudo" />
+    </property>
+    <many-to-one class="TCC.CL.Core.Entities.Usuario, TCC.CL.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Autor">
+      <column name="Autor_id" />
+    </many-to-one>
+    <many-to-one class="TCC.CL.Core.Entities.Receita, TCC.CL.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Receita">
+      <column name="Receita_id" />
+    </many-to-one>
+    <many-to-one class="TCC.CL.Core.Entities.Comentario, TCC.CL.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Parente" not-found="ignore">
+      <column name="Parente_id" />
+    </many-to-one>
+  </class>
+</hibernate-mapping>
