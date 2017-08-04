@@ -1,0 +1,61 @@
+﻿@model List<TCC.CL.Core.Entities.Receita>
+
+<div class="row expanded align-center banner-principal">
+    <img class="banner_img" src="@Url.Content("~/Content/foundation/img/comida-banner.jpg")" alt="Comida" />
+
+    <div class="large-10 small-centered columns quotation_wrap busca-principal">
+        <h3>Bem Vindo a Cozinha Livre</h3>
+        <p>O Primeiro site colaborativo de receitas.</p>
+
+        <div class="row align-center">
+            <div class="large-6 small-centered columns">
+                @using (Html.BeginForm("Index", "Busca", FormMethod.Get, new { @id = "BuscaHome" }))
+                {
+                    <div class="input-group">
+                        @Html.TextBox("q", "", new { @class = "input-group-field" })
+                        <div class="input-group-button">
+                            <input type="submit" class="button" value="Buscar" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row expanded">
+    <div class="large-10 medium-12 columns">
+        <h3>Receitas em Destaque</h3>
+        <!-- Grid Example -->
+        <div class="row small-up-1 medium-up-2 large-up-4 lista-thumbnail">
+            @{
+                foreach (var receita in Model)
+                {
+                    <div class="column">
+                        <div class="thumbnail">
+                            <a href="@Url.RouteUrl(new { controller="Receitas", action="Receita", id = receita.Id })">
+                                <img src="@receita.GetUrlImagem(300, 300)">
+                                 <article>
+                                    <h4>@receita.Titulo</h4>
+                                    <p>
+                                        @Html.RemoveHtml(receita.Resumo(15))
+                                    </p>
+                                </article>
+                                <hr />
+                                <footer>
+                                    <p>
+                                        Ultima revisão: @receita.Data.ToLocalTime()
+                                        <br />
+                                        Autor: @receita.Autor.Nome
+                                    </p>
+                                </footer>
+                            </a>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+    </div>
+    @Html.Action("Categorias")
+</div>

@@ -1,0 +1,17 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<div class="row expanded about">
+    <div class="large-10 medium-12 columns">
+        <h3>@ViewBag.Title</h3>
+        <p>
+            Ih desculpe, ocorreu um erro.
+        </p>
+        <p>
+            @Model.Exception
+        </p>
+    </div>
+</div>

@@ -1,0 +1,211 @@
+﻿@using TCC.CL.Core.Enumeration
+@using TCC.CL.Core.Helper
+@model TCC.CL.Core.Entities.PessoaJuridica
+
+@{
+    IList<SelectListItem> lista = new List<SelectListItem>();
+
+    foreach (UF item in Enum.GetValues(typeof(UF)))
+    {
+        SelectListItem select = new SelectListItem();
+        select.Value = ((int)item).ToString();
+        select.Text = item.GetDescription();
+        lista.Add(select);
+    }
+}
+
+@using (Html.BeginForm("IncluirPatrocinador", "Account", FormMethod.Post, new { @id = "Patrocinador", data_abide = "", novalidate = "" }))
+{
+    <div data-abide-error class="alert callout" style="display: none;">
+        <p><i class="fi-alert"></i> Campos com erro.</p>
+    </div>
+    <div class="row">
+        <div class="medium-12 columns">
+            <label>
+                Razão Social
+                @Html.TextBoxFor(x => x.RazaoSocial, new { placeholder = "Razão Social", required = "" })
+                <span class="form-error">
+                    Razão Social obrigatório
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-8 columns">
+            <label>
+                Nome Fantasia
+                @Html.TextBoxFor(x => x.NomeFantasia, new { placeholder = "Nome Fantasia", required = "" })
+                <span class="form-error">
+                    Nome Fantasia Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-4 columns">
+            <label>
+                CNPJ
+                @Html.TextBox("CNPJ", "", new { placeholder = "00.000.000/0000-00", required = "", patternType = "CNPJ" })
+                <span class="form-error">
+                    CPF Obrigatório
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-2 columns">
+            <label>
+                UF
+                @Html.DropDownList("UF", lista, "Estado", new { required = "" })
+                <span class="form-error">
+                    Estado Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-5 columns">
+            <label>
+                Cidade
+                @Html.TextBox("Cidade", "", new { placeholder = "Cidade", required = "" })
+                <span class="form-error">
+                    Cidade Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-5 columns">
+            <label>
+                Bairro
+                @Html.TextBox("Bairro", "", new { placeholder = "Bairro", required = "" })
+                <span class="form-error">
+                    Cidade Obrigatório
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-10 columns">
+            <label>
+                Endereço
+                @Html.TextBox("Logradouro", "", new { placeholder = "Endereço", required = "" })
+                <span class="form-error">
+                    Endereço Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-2 columns">
+            <label>
+                Numero
+                @Html.TextBox("Numero", "", new { placeholder = "Numero", required = "" })
+                <span class="form-error">
+                    Numero Obrigatório
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-6 columns">
+            <label>
+                Complemento
+                @Html.TextBox("Complemento", "", new { placeholder = "Complemento" })
+            </label>
+        </div>
+        <div class="medium-6 columns">
+            <label>
+                CEP
+                @Html.TextBox("CEP", "", new { placeholder = "CEP", required = "", patternType = "CEP" })
+                <span class="form-error">
+                    CEP Obrigatório
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-4 columns">
+            <label>
+                Telefone Comercial
+                @Html.TextBox("Telefone_Comercial", "", new { placeholder = "(99) 99999-9999", required = "", patternType = "telefone" })
+                <span class="form-error">
+                    Comercial Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-4 columns">
+            <label>
+                Telefone Pessoal
+                @Html.TextBox("Telefone_Pessoal", "", new { placeholder = "(99) 99999-9999", patternType = "telefone" })
+            </label>
+        </div>
+        <div class="medium-4 columns">
+            <label>
+                Telefone Residencial
+                @Html.TextBox("Telefone_Residencial", "", new { placeholder = "(99) 99999-9999", patternType = "telefone" })
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <h4>Dados de acesso</h4>
+    </div>
+    <div class="row">
+        <div class="medium-6 columns">
+            <label>
+                Nome do Autor
+                @Html.TextBox("Nome", null, new { placeholder = "Nome Autor", required = "" })
+                <span class="form-error">
+                    Nome do Autor Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-6 columns">
+            <label>
+                Telefone do Autor
+                @Html.TextBox("Telefone_Autor", null, new { placeholder = "(99) 99999-9999", required = "" })
+                <span class="form-error">
+                    Telefone do Autor Obrigatório
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-6 columns">
+            <label>
+                E-mail
+                @Html.TextBox("Email", null, "email", new { placeholder = "eu@email.com", required = "", type = "email" })
+                <span class="form-error">
+                    E-mail Obrigatório
+                </span>
+            </label>
+        </div>
+        <div class="medium-6 columns">
+            <label>
+                Login
+                @Html.TextBox("Login", null, new { placeholder = "MasterChief", required = "" })
+                <span class="form-error">
+                    Login Obrigatório
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-6 columns">
+            <label>
+                Senha
+                @Html.Password("Senha", null, new { placeholder = "**********", required = "" })
+                <span class="form-error">
+                    Senha Obrigatória
+                </span>
+            </label>
+        </div>
+        <div class="medium-6 columns">
+            <label>
+                Repita a senha
+                @Html.Password("RepitaSenha", null, new { placeholder = "**********", required = "", data_equalto = "Senha" })
+                <span class="form-error">
+                    Repita a senha corretamente
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-2 columns medium-offset-10 text-right">
+            <a class="button alert" href="javascript:history.back();">Cancelar</a>
+            <input type="submit" class="button" value="Enviar">
+        </div>
+    </div>
+}
